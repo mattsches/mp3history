@@ -1,0 +1,25 @@
+#placement {
+    height: 500px;
+    margin: 32px;
+}
+.timeglider-truck {
+    background: #fff url(../img/fmc2011.jpg) left top no-repeat;
+}
+.timeglider-tick {
+    background-color: #3F9DE0;
+}
+.timeglider-footer {
+    display: none;
+	/*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#96BD24', endColorstr='#C6ED54'); 
+	background: -webkit-gradient(linear, left top, left bottom, from(#96BD24), to(#C6ED54));
+	background: -moz-linear-gradient(top,  #96BD24,  #C6ED54);
+	background-repeat:no-repeat;*/
+}
+.timeglider-event-image-layout img {
+    height:48px;
+    width:auto;
+    position:absolute;
+}
+.timeglider-event-icon {
+    top:4px !important;
+}

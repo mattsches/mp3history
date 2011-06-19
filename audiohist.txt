@@ -1,0 +1,7 @@
+Eine kurze Geschichte des Musikhörens auf dem Computer
+
+Das MP3-Format hat vor wenigen Wochen seinen 18. Geburtstag gefeiert und ist somit endlich "erwachsen" geworden. Seit 1993 das MP3-Format veröffentlicht wurde, hat sich die Musik zunehmend vom physischen Datenträger gelöst und ist immer mehr ins Internet gewandert. 
+
+Ich möchte die wichtigsten Technologien, Audioplayer, Social Networks und Onlineshops, die in den letzten zwei Jahrzehnten entstanden sind und das Musikhören revolutioniert haben, veranschaulichen. Neben dem Rückblick möchte ich mit euch den Status Quo feststellen und über die Zukunft von Musikdiensten, Audioplayern und Technologien diskutieren.
+
+Außerdem möchte ich ein OSS-Projekt vorstellen, das viele der neuesten Technologien "unter einem Dach" vereint und einen (meiner Meinung nach) vielversprechenden Ansatz für die nahe Zukunft zeigt.
