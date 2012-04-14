@@ -1,17 +1,20 @@
-/**
- * @license 
- * copyright 2011, Mnemograph LLC
+/*
  * Timeglider for Javascript / jQuery 
  * http://timeglider.com/jquery
  *
- * Licensed under the MIT open source license
+ * Copyright 2011, Mnemograph LLC
+ * Licensed under Timeglider Dual License
  * http://timeglider.com/jquery/?p=license
  *
  */
 
+// initial declaration of timeglider object for widget
+// authoring app will declare a different object, so
+// this will defer to window.timeglider
+timeglider = window.timeglider || {version:"0.1.0"};
 
-// initial declaration of timeglider object
-var timeglider = window.timeglider = {version:"0.1.0"};
+
+
 
 /*
 *  TG_Date
@@ -19,10 +22,10 @@ var timeglider = window.timeglider = {version:"0.1.0"};
 *  dependencies: jQuery, jQuery.global
 *
 * You might be wondering why we're not extending JS Date().
-* That might be a good idea eventually. There are some
+* That might be a good idea some day. There are some
 * major issues with Date(): the "year zero" (or millisecond)
 * in JS and other date APIs is 1970, so timestamps are negative
-* prior to that. JS's Date() can't handle years prior to
+* prior to that; JS's Date() can't handle years prior to
 * -271820, so some extension needs to be created to deal with
 * times (on the order of billions of years) existing before that.
 *
@@ -32,170 +35,116 @@ var timeglider = window.timeglider = {version:"0.1.0"};
 *
 */
 
+/*
+
+IMPORTED DATE STANDARD
+
+http://www.w3.org/TR/NOTE-datetime
+"a profile of" ISO 8601 date format
+
+Complete date plus hours, minutes and seconds:
+YYYY-MM-DDThh:mm:ssTZD (eg 1997-07-16T19:20:30+01:00)
+
+Acceptable:
+YYYY
+YYYY-MM
+YYYY-MM-DD
+YYYY-MM-DDT13
+YYYY-MM-DD 08:15 (strlen 16)
+YYYY-MM-DD 08:15:30 (strlen 19)
+(above would assume either a timeline-level timezone, or UTC)
+
+containing its own timezone, this would ignore timeline timezone
+YYYY-MM-DD 08:15:30-07:00
+   
+
+*/
+
+timeglider.TG_Date = {};
+
+
 (function(tg){
   
-  var tg = timeglider, $ = jQuery;
+  	
+	var tg = timeglider, $ = jQuery;
   
-  // caches speed up costly calculations
-  var getRataDieCache = {},
-      getDaysInYearSpanCache = {},
-      getBCRataDieCache = {},
-      getDateFromRDCache = {},
-      getDateFromSecCache = {};
+	// caches speed up costly calculations
+	var getRataDieCache = {},
+		getDaysInYearSpanCache = {},
+		getBCRataDieCache = {},
+		getDateFromRDCache = {},
+		getDateFromSecCache = {};
+		
+	var VALID_DATE_PATTERN = /^(\-?\d+)?(\-\d{1,2})?(\-\d{1,2})?(?:T| )?(\d{1,2})?(?::)?(\d{1,2})?(?::)?(\d{1,2})?(\+|\-)?(\d{1,2})?(?::)?(\d{1,2})?/;
   
-      
-  tg.TG_Date = function (strOrNum, date_display) {
-
-      var dateStr, isoStr, gotSec, dummyDate;
-    
-      // Morton, we've got seconds coming in!
-      if (typeof(strOrNum) == "number") {
-          dateStr = isoStr = TG_Date.getDateFromSec(strOrNum);
-          gotSec = strOrNum;
-      } else {
-          // string -- floating dates like "today"
-          if (strOrNum == "today") {
-            strOrNum = TG_Date.getToday();
-          } 
-          dateStr = isoStr = strOrNum;
-      }
   
-  	  if (isValidDateString(dateStr) === false) {
-  	    return {error:"Invalid date"};
-  	    /// it's valid
-      } else {
-	    	  
-      		dateStr = dateStr.replace(",", "");
+   // MAIN CONSTRUCTOR
+        
+	tg.TG_Date = function (strOrNum, date_display, offSec) {
+
+		var dateStr, isoStr, gotSec,
+    		offsetSeconds = offSec || 0;
+   
+   
+   		// SERIAL SECONDS
+		if (typeof(strOrNum) == "number") {
+      	  	
+			dateStr = isoStr = TG_Date.getDateFromSec(strOrNum);
+			gotSec = (strOrNum + offsetSeconds);
+		
+		} else if (typeof(strOrNum) === "object") {
+			
+			// dateStr = strOrNum.ye + "-" + strOrNum.mo + "-" + strOrNum.da 
+		
+		// STRING
+		} else {
+		
+			if (strOrNum == "today") {
+				strOrNum = TG_Date.getToday();
+			}
+			
+			dateStr = isoStr = strOrNum;
+		}
   
-      		if (dateStr.substr(0,1) == "-") {
-      		  this.bce=1;
-      		  dateStr = dateStr.substr(1);
-      		} else {
-      		  this.bce=0;
-    		  }
+  
+  		if (VALID_DATE_PATTERN.test(dateStr)) {
 
-      		// remove anything not a number like "bce", etc, and
-      		// make for an easy split!
-      		dateStr = dateStr.replace(/[^0-9]/g, "-");
+			// !TODO: translate strings like "today" and "now"
+			// "next week", "a week from thursday", "christmas"
+	       		
+      		var parsed =  TG_Date.parse8601(dateStr);
+      		
+      		
+      		if (parsed.tz_ho) {
+      			// this is working ------ timezones in the string translate correctly
+      			// OK: transforms date properly to UTC since it should have been there
+      			parsed = TG_Date.toFromUTC(parsed, {hours:parsed.tz_ho, minutes:parsed.tz_mi}, "to");
+      		}
+      		
+      		
+      		// ye, mo, da, ho, mi, se arrive in parsed (with tz_)
+      					
+			$.extend(this,parsed);
 
-      		var arr = dateStr.split("-");
-
-      		this.ye = (this.bce === 0) ? boil(arr[0]) : -1 * boil(arr[0]);
-      		this.mo = boil(arr[1]);
-      		this.mo_num = getMoNum(this.mo, this.ye);
-      		this.da = boil(arr[2]);
-      		this.ho = boil(arr[3]) || 0;
-      		this.mi = boil(arr[4]) || 0;
-      		// .se second is the clock second -- 0-60
-      		this.se = boil(arr[5]) || 0;
-      		// rd : serial day from year zero
+      		// SERIAL day from year zero
       		this.rd  = TG_Date.getRataDie(this);
+    
+      		// SERIAL month from year 0
+      		this.mo_num = getMoNum(this);
       		
-      		// if (this.ye < 0) debug.log("negative rd:" + this.rd);
-      		
-      		// .sec second is the serial second from year 0!
+      		// SERIAL second from year 0
       		this.sec = gotSec || getSec(this);
       		
-      		this.date_display = (date_display) ? (date_display.toLowerCase()).substr(0,2) : "";
-    			
-      		// Esp. for formatting, we'll use jQuery.global for dates that
-      		// support the Date() object; before 50,000 bce, we'll need to 
-      		// resort to another formatting system that looks only at years.
-          
-    			this.jsDate = dummyDate = new Date(this.ye, (this.mo-1), this.da, this.ho, this.mi, this.se, 0);
-    			
-      	  var d1 = new Date(1948,11,5,10,0,0,0);
-      	  
+      		this.date_display = (date_display) ? (date_display.toLowerCase()).substr(0,2) : "da";
+			
+			// TODO: get good str from parse8601  
       		this.dateStr = isoStr;
-      		
-  		} 
-		
-  		/// INTERNAL FUNCTIONS
-
-  	    function isValidDateString(str) {
-      	  // VALIDATE STRING
-      	  var aStr = jQuery.trim(str);
-      		reg = new RegExp(/[T0-9-: ]/);
-      		if (reg.test(aStr)) {
-      		  return aStr;
-      	  } else {
-      	    return false;
-          }
-        };
-  
-  
-      	/*
-      	* isValidDate
-      	* Rejects dates like "2001-13-32" and such
-      	* TODO: make sure no non leap years have Feb 29
-      	*
-      	*/
-      	function isValidDate (ye, mo, da) {
-	  
-      		var ld = TG_Date.getMonthDays(mo, ye);
-      		// day isn't appropriate for month
-      		if ((da > ld) || (da <= 0)) { return false; } 
-      		// invalid month numbers
-      		if ((mo > 12) || (mo < 0)) { return false; }
-      		// there's no year "0"
-      		if (ye == 0) { return false; }
-      	  // Is it a hex number? We need to make sure it's only got 0-9
-      		if ((typeof ye != "number") || (String(ye).match(/([0-9]+)/) == false)) { return false; }
-	
-      		return true;
-      	};
-	
-        /*
-        * boil
-        * basic wrapper for parseInt to clean leading zeros,
-        * as in dates
-        */
-      	function boil (n) {
-      		return parseInt(n, 10);
-      	};
-
-
-      	function getSec (fd) {
-      		// 
-      		var daSec = Math.abs(fd.rd) * 86400;
-      		var hoSec = (fd.ho) * 3600;
-      		var miSec = (fd.mi - 1) * 60;
-      		var bc = 1;
-      		if (fd.rd < 0) bc = -1;
-      		return bc * (daSec + hoSec + miSec);
-      	};
-
-
-  
-        /* getMoNum
-        *
-        * @param mo {Number} month from 1 to 12
-        * @param ye {Number} straight year
-        *
-        */ 
-        function getMoNum (mo, ye) {
-        	    if (ye > 0) {
-        			return  ((ye -1) * 12) + mo;
-        		} else {
-        			return getMoNumBC(mo, ye);
-        		}
-        };
-  
-        /*
-        * getMoNumBC
-        * In BC time, serial numbers for months are going backward
-        * starting with December of 1 bce. So, a month that is actually
-        * "month 12 of year -1" is actually just -1, and November of 
-        * year 1 bce is -2. Capiche!?
-        *
-        * @param {object} ob ---> .ye (year)  .mo (month)
-        * @return {number} serial month number (negative in this case)
-        */
-        function getMoNumBC (mo, ye) {
-        	var absYe = Math.abs(ye);
-        	var n = ((absYe - 1) * 12) + (12-(mo -1));
-        	return -1 * n;
-        };
+  		
+  		} else {
+  			return {error:"invalid date"};
+  		}
+		        
+        return this;
 
   } // end TG_Date Function
 
@@ -215,23 +164,29 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   */
   TG_Date.getTimeUnitSerial = function (fd, unit) {
       var ret = 0;
+      var floorCeil;
+      
+      if (fd.ye < 0) {
+      	floorCeil = Math.ceil;
+      } else {
+      	floorCeil = Math.floor;
+      }
       
   		switch (unit) {
-  			case "ye": ret = fd.ye; break;
+  			case "da": ret =  fd.rd; break;
   			// set up mo_num inside TG_Date constructor
   			case "mo": ret =  fd.mo_num; break;
-  			case "da": ret =  fd.rd;
-  			case "de": ret =  Math.ceil(fd.ye / 10); break;
-  			case "ce": ret =  Math.ceil(fd.ye / 100); break;
-  			case "thou": ret =  Math.ceil(fd.ye / 1000); break;
-  			case "tenthou": ret =  Math.ceil(fd.ye / 10000); break;
-  			case "hundredthou": ret =  Math.ceil(fd.ye / 100000); break;
-  			case "mill": ret =  Math.ceil(fd.ye / 1000000); break;
-  			case "tenmill": ret =  Math.ceil(fd.ye / 10000000); break;
-  			case "hundredmill": ret =  Math.ceil(fd.ye / 100000000); break;
-  			case "bill": ret =  Math.ceil(fd.ye / 1000000000); break;
+  			case "ye": ret = fd.ye; break;
+  			case "de": ret =  floorCeil(fd.ye / 10); break;
+  			case "ce": ret =  floorCeil(fd.ye / 100); break;
+  			case "thou": ret =  floorCeil(fd.ye / 1000); break;
+  			case "tenthou": ret =  floorCeil(fd.ye / 10000); break;
+  			case "hundredthou": ret =  floorCeil(fd.ye / 100000); break;
+  			case "mill": ret =  floorCeil(fd.ye / 1000000); break;
+  			case "tenmill": ret =  floorCeil(fd.ye / 10000000); break;
+  			case "hundredmill": ret =  floorCeil(fd.ye / 100000000); break;
+  			case "bill": ret =  floorCeil(fd.ye / 1000000000); break;
   		}
-  	
   		return ret;
   };
 
@@ -246,44 +201,39 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   };
 
 
-  TG_Date.twentyFourToTwelve = function (e) {
+	TG_Date.twentyFourToTwelve = function (e) {
 	
-  	var dob = {};
-  	dob.ye = e.ye;
-  	dob.mo = e.mo;
-  	dob.da = e.da;
-  	dob.ho = e.ho;
-  	dob.mi = e.mi;
-  	dob.ampm = "am";
-
-  	if (e.ho) {
-  		if (e.ho >= 12) {
-  			dob.ampm = "pm";
-  			if (e.ho > 12) {
-  				dob.ho = e.ho - 12;
-  			} else {
-  				dob.ho = 12;
-  			}
-  		} else if (e.ho == 0) {
-  			dob.ho = 12;
-  			dob.ampm = "am";
-  		} else {
-  			dob.ho = e.ho;
-  		}
-  	} else {
-  		dob.ho = 12;
-  		dob.mi = 0;
-  		dob.ampm = "am";
-  	}
+		var dob = {};
+		dob.ye = e.ye;
+		dob.mo = e.mo;
+		dob.da = e.da;
+		dob.ho = e.ho;
+		dob.mi = e.mi;
+		dob.ampm = "am";
 	
-  	return dob;
-  };
-
-
-
+		if (e.ho) {
+			if (e.ho >= 12) {
+				dob.ampm = "pm";
+				if (e.ho > 12) {
+					dob.ho = e.ho - 12;
+				} else {
+					dob.ho = 12;
+				}
+			} else if (e.ho == 0) {
+				dob.ho = 12;
+				dob.ampm = "am";
+			} else {
+				dob.ho = e.ho;
+			}
+		} else {
+			dob.ho = 12;
+			dob.mi = 0;
+			dob.ampm = "am";
+		}
 	
-
-
+		return dob;
+	};
+	
 	
   /*
   * RELATES TO TICK WIDTH: SPECIFIC TO TIMELINE VIEW
@@ -366,8 +316,8 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   * RELATES TO TICK WIDTH: SPECIFIC TO TIMELINE VIEW
   */
   TG_Date.getMonthWidth = function(mo,ye,tickWidth) {
-
-  	var dayWidth = t / 28;
+	
+  	var dayWidth = tickWidth / 28;
   	var ad;
   	var nd = 28;
 
@@ -375,7 +325,7 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   		case 1: case 3: case 5: case 7: case 8: case 10: case 12: ad = 3; break;
   		case 4: case 6: case 9: case 11: ad = 2; break;
   		// leap year
-  		case 2: if (TG_Date.isLeapYear(yr) == true) { ad = 1; } else { ad=0; }; break;
+  		case 2: if (TG_Date.isLeapYear(ye) == true) { ad = 1; } else { ad=0; }; break;
 		
   	}
 
@@ -431,11 +381,11 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   @param snum is the rata die or day serial number
   */
   TG_Date.getDateFromRD = function (snum) {
-    // in case it arrives as an RD-decimal
     
     if (getDateFromRDCache[snum]) {
       return getDateFromRDCache[snum]
     }
+    // in case it arrives as an RD-decimal
     var snumAb = Math.floor(snum);
 
     var bigP = 146097; // constant days in big cal cycle
@@ -487,7 +437,9 @@ var timeglider = window.timeglider = {version:"0.1.0"};
 	  // the sec/86400 represents a "rd-decimal form"
 	  // that will allow extraction of hour, minute, second
   	var ret = TG_Date.getDateFromRD(sec / 86400);
+  	
   	getDateFromSecCache[sec] = ret;
+  	
   	return ret;
   };
 
@@ -505,9 +457,6 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   };
 
 
-
-	
-	
   /*
   * getRataDie
   * Core "normalizing" function for dates, the serial number day for
@@ -540,6 +489,7 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   	ret = (fat + moreDays + daysSoFar + da) - 366;
 	
   } else if (ye < 0) {
+    
   	ret = TG_Date.getBCRataDie({ye:ye, mo:mo, da:da});
   } 
 
@@ -604,9 +554,14 @@ var timeglider = window.timeglider = {version:"0.1.0"};
 
   };
 
+	TG_Date.monthNamesLet = ["","J","F","M","A","M","J","J","A","S","O","N","D"];
 
-
-
+    TG_Date.monthsDayNums = [0,31,28,31,30,31,30,31,31,30,31,30,31,29];
+  
+    // NON-CULTURE
+    TG_Date.units = ["da", "mo", "ye", "de", "ce", "thou", "tenthou", "hundredthou", "mill", "tenmill", "hundredmill", "bill"];
+    
+    
   /*
   Counts serial days starting with -1 in year -1. Visualize a number counting 
   from "right to left" on top of the other calendrical pieces chunking away
@@ -644,18 +599,14 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   TG_Date.setCulture = function(culture_str) {
     
     jQuery.global.culture = jQuery.global.cultures[culture_str];
-  	/*
-  	*  Making use of jQuery.global.js here --- but only for names and some other formatting
-  	*  offerings. 
-  	*/
+ 
   	// ["","January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     TG_Date.monthNames = $.merge([""],jQuery.global.culture.calendar.months.names);
+    
     // ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     TG_Date.monthNamesAbbr = $.merge([""],jQuery.global.culture.calendar.months.namesAbbr);
   
-    TG_Date.monthNamesLet = ["","J","F","M","A","M","J","J","A","S","O","N","D"];
-
-    TG_Date.monthsDayNums = [0,31,28,31,30,31,30,31,31,30,31,30,31,29];
+    
   
     // ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     TG_Date.dayNames = jQuery.global.culture.calendar.days.names;
@@ -665,10 +616,6 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   
     TG_Date.dayNamesShort = jQuery.global.culture.calendar.days.namesShort;
   
-  
-    // NON-CULTURE
-    TG_Date.units = ["da", "mo", "ye", "de", "ce", "thou", "tenthou", "hundredthou", "mill", "tenmill", "hundredmill", "bill"];
-    
     TG_Date.patterns = jQuery.global.culture.calendar.patterns;
     
   };
@@ -681,57 +628,592 @@ var timeglider = window.timeglider = {version:"0.1.0"};
   
   TG_Date.prototype = {
       
-      format : function (sig, useLimit) {
-        
-        /* "en" formats
-         // short date pattern
-          d: "M/d/yyyy",
-          // long date pattern
-          D: "dddd, MMMM dd, yyyy",
-          // short time pattern
-          t: "h:mm tt",
-          // long time pattern
-          T: "h:mm:ss tt",
-          // long date, short time pattern
-          f: "dddd, MMMM dd, yyyy h:mm tt",
-          // long date, long time pattern
-          F: "dddd, MMMM dd, yyyy h:mm:ss tt",
-          // month/day pattern
-          M: "MMMM dd",
-          // month/year pattern
-          Y: "yyyy MMMM",
-          // S is a sortable format that does not vary by culture
-          S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss"
-        */
-        
-        // If, for example, an event wants only year-level time being displayed
-        // (and not month, day...) filter out the undesired time levels
-        if (useLimit == true) {
-          // reduce to 2 chars for consistency
-          var ddlim = this.date_display.substr(0,2);
-          switch (ddlim) {
-            case "no": return ""; break;
-            case "ye": sig = "yyyy"; break;
-            case "mo": sig = "Y"; break;
-            case "da": sig = "D"; break;
-            case "ho": sig = "f"; break;
-            
-            default: sig = "f";
-          }
-        }
-        // If the date is bce, get the bce equivalent for 
-        // the culture and append it or prepend it...
-        
-        return $.global.format(this.jsDate, sig);
-
-      }
-
-
-
-  } // end .prototype
+		format : function (sig, useLimit, tz_off) {
+		
+			var offset = tz_off || {"hours":0, "minutes":0};
+		
+			var jsDate, fromUTC; // jsDate
+		
+			/* "en" formats
+			// short date pattern
+			d: "M/d/yyyy",
+			// long date pattern
+			D: "dddd, MMMM dd, yyyy",
+			// short time pattern
+			t: "h:mm tt",
+			// long time pattern
+			T: "h:mm:ss tt",
+			// long date, short time pattern
+			f: "dddd, MMMM dd, yyyy h:mm tt",
+			// long date, long time pattern
+			F: "dddd, MMMM dd, yyyy h:mm:ss tt",
+			// month/day pattern
+			M: "MMMM dd",
+			// month/year pattern
+			Y: "yyyy MMMM",
+			// S is a sortable format that does not vary by culture
+			S: "yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss"
+			*/
+			
+			// If, for example, an event wants only year-level time being displayed
+			// (and not month, day...) filter out the undesired time levels
+			if (useLimit == true) {
+			  // reduce to 2 chars for consistency
+			  var ddlim = this.date_display.substr(0,2);
+			  switch (ddlim) {
+			    case "no": return ""; break;
+			    case "ye": sig = "yyyy"; break;
+			    case "mo": sig = "MMM yyyy"; break;
+			    case "da": sig = "MMM d, yyyy"; break;
+			    case "ho": sig = "MMM d, yyyy h:mm tt"; break;
+			    
+			    default: sig = "f";
+			  }
+			}
+			
+			          	
+          	if (this.ye > -270000){
+				
+				fromUTC = TG_Date.toFromUTC(_.clone(this), offset, "from");  
+          		  		
+    			jsDate = new Date(fromUTC.ye, (fromUTC.mo-1), fromUTC.da, fromUTC.ho, fromUTC.mi, fromUTC.se, 0);
   
+				return $.global.format(jsDate, sig);
+			
+			
+    		} else {
+    			// BIGNUM_PROBLEM
+				// year < -271,000 will fail as js Date
+    			// JUST RETURN YEAR
+    			return this.ye;
+    		}
+			
+		}
+
+  	} // end .prototype
+  	
+  	
+  
+	TG_Date.getTimeOffset = function(offsetString) {
+		
+		// remove all but numbers, minus, colon
+		var oss = offsetString.replace(/[^-\d:]/gi, ""),
+			osA = oss.split(":"),
+			ho = parseInt(osA[0], 10),
+			mi = parseInt(osA[1], 10),
+		
+			// minutes negative if hours are 
+			sw = (ho < 0) ? -1 : 1,
+		
+			miDec = sw * ( mi / 60 ),
+			dec = (ho + miDec),
+			se = dec * 3600;
+			
+			var ob = {"decimal":dec, "hours":ho, "minutes":mi, "seconds":se, "string":oss};
+	
+			return ob; 
+		
+	};	
+	
+	
+	TG_Date.tzOffsetStr = function (datestr, offsetStr) {
+		if (datestr) {
+		if (datestr.length == 19) {
+			datestr += offsetStr;
+		} else if (datestr.length == 16) {
+			datestr += ":00" + offsetStr;
+		}
+		return datestr;
+		}
+	};
+	
+		
+	/*
+	* TG_parse8601
+	* transforms string into TG Date object
+	*/
+	TG_Date.parse8601 = function(str){
+		
+		/*
+		len   str
+    	4     YyYyYyY
+		7     YyYyYyY-MM
+		10    YyYyYyY-MM-DD
+		13    YyYyYyY-MM-DDTHH (T is optional between day and hour)
+		16    YyYyYyY-MM-DD HH:MM
+		19    YyYyYyY-MM-DDTHH:MM:SS
+		25    YyYyYyY-MM-DD HH:MM:SS-ZH:ZM
+		*/
+		
+		var ye, mo, da, ho, mi, se, bce, bce_ye, tz_pm, tz_ho, tz_mi,
+			mo_default = 1,
+			da_default = 1,
+			ho_default = 12,
+			mi_default = 0,
+			se_default = 0,
+			
+			dedash = function (n){
+				if (n) {
+			 		return parseInt(n.replace("-", ""), 10);
+			 	} else {
+			 		return 0;
+			 	}
+			},
+			//       YyYyYyY    MM          DD
+			reg = VALID_DATE_PATTERN;
+			var rx = str.match(reg);
+
+    	// picks up positive OR negative (bce)	
+		ye = parseInt(rx[1]);
+		
+		if (!ye) return {"error":"invalid date; no year provided"};
+
+		mo = dedash(rx[2]) || mo_default;
+		da = dedash(rx[3]) || da_default;
+		// rx[4] is the "T" or " "
+		ho = dedash(rx[4]) || da_default;
+		// rx[6] is ":"
+		mi = dedash(rx[5]) || mi_default;
+		// rx[8] is ":"
+		se = dedash(rx[6]) || mi_default;
+				
+		// if year is < 1 or > 9999, override
+		// tz offset, set it to 0/UTC no matter what
+		
+		// If the offset is negative, we want to make
+		// sure that minutes are considered negative along
+		// with the hours"-07:00" > {tz_ho:-7; tz_mi:-30}
+		tz_pm = rx[7] || "+";
+   		tz_ho = parseInt(rx[8], 10) || 0;
+		if (tz_pm == "-") {tz_ho = tz_ho * -1;}
+		tz_mi = parseInt(rx[9], 10) || 0;
+		if (tz_pm == "-") {tz_mi = tz_mi * -1;}
+		
+		// is it a leap year?? get this once
+
+		return {"ye":ye, "mo":mo, "da":da, "ho":ho, "mi":mi, "se":se, "tz_ho":tz_ho, "tz_mi":tz_mi}
+		
+
+	}; // parse8601
+	
+	
+	TG_Date.getLastDayOfMonth = function(ye, mo) {
+		var lastDays = [0,31,28,31,30,31,30,31,31,30,31,30,31],
+			da = 0;
+		if (mo == 2 && TG_Date.isLeapYear(ye) == true) {
+			da = 29;
+		} else {
+			da = lastDays[mo];
+		}
+		return da;
+		
+	}; 
+	
+	/* 
+	* getDateTimeStrings
+	*
+	* @param str {String} ISO8601 date string
+	* @return {Object} date, time as strings with am or pm
+	*/
+	TG_Date.getDateTimeStrings = function (str) {
+	
+		var obj = TG_Date.parse8601(str);
+	
+		// DATE IS EASY:
+		var date_val = obj.ye + "-" + unboil(obj.mo) + "-" + unboil(obj.da);
+		
+		var ampm = "pm";
+		
+		if (obj.ho > 12) {
+			obj.ho -= 12;
+			ampm = "pm";
+		} else {
+			if (obj.ho == 0) { obj.ho = "12"; }
+			ampm = "am";
+		}
+	
+		var time_val = boil(obj.ho) + ":" + unboil(obj.mi) + " " + ampm;
+		
+		return {"date": date_val, "time":time_val}
+	};
+	
+	
+	// This is for a separate date input field --- YYYY-MM-DD (DATE ONLY)
+	// field needs to be restricted by the $.alphanumeric plugin
+	TG_Date.transValidateDateString = function (date_str) {
+		
+		if (!date_str) return false; // date needs some value
+		var reg = /^(\-?\d+|today|now) ?(bce?)?-?(\d{1,2})?-?(\d{1,2})?/,
+			valid = "",
+			match = date_str.match(reg),
+			zb = TG_Date.zeroButt;
+			
+		if (match) {
+			// now: 9999-09-09
+			// today: get today
+			
+			// translate
+			var ye = match[1],
+				bc = match[2] || "",
+				mo = match[3] || "07",
+				da = match[4] || "1";
+			
+			if (parseInt(ye, 10) < 0 || bc.substr(0,1) == "b") {
+				ye = -1 * (Math.abs(ye));
+			}
+			
+			if (TG_Date.validateDate(ye, mo, da)) {
+				return ye + "-" + zb(mo) + "-" + zb(da);
+			} else {
+				return false;
+			}
+		
+			
+		} else {
+			return false;
+		}
+	};
+	
+	// This is for a separate TIME input field: 12:30 pm
+	// field needs to be restricted by the $.alphanumeric plugin
+	TG_Date.transValidateTimeString = function (time_str) {
+		if (!time_str) return "12:00:00";
+		
+		var reg = /^(\d{1,2}|noon):?(\d{1,2})?:?(\d{1,2})? ?(am|pm)?/i,
+			match = time_str.toLowerCase().match(reg),
+			valid = "",
+			zb = TG_Date.zeroButt;
+		
+		if (match[1]) {
+
+			// translate
+			if (match[0] == "noon") {
+				valid = "12:00:00"
+			} else {
+				// HH MM
+				var ho = parseInt(match[1], 10) || 12;
+				var mi = parseInt(match[2], 10) || 0;
+				var se = parseInt(match[3], 10) || 0;
+				var ampm = match[4] || "am";
+				
+				if (TG_Date.validateTime(ho, mi, se) == false) return false;
+				if (ampm == "pm" && ho < 12) ho += 12;
+				valid = zb(ho) + ":" + zb(mi) + ":" + zb(se);
+			}
+		} else {
+			valid = false;
+		}
+		
+		return valid;
+	};
+	
+	
+	// make sure hours and minutes are valid numbers
+	TG_Date.validateTime = function (ho, mi, se) {
+		if ((ho < 0 || ho > 23) || (mi < 0 || mi > 59) || (se < 0 || se > 59)) { return false; }
+		return true;
+	};
+	
+	
+  	/*
+  	* validateDate
+  	* Rejects dates like "2001-13-32" and such
+  	*
+  	*/
+  	TG_Date.validateDate = function (ye, mo, da) {
+  		
+  		// this takes care of leap year
+  		var ld = TG_Date.getMonthDays(mo, ye);
+
+  		if ((da > ld) || (da <= 0)) { return false; } 
+  		// invalid month numbers
+  		if ((mo > 12) || (mo < 0)) { return false; }
+  		// there's no year "0"
+  		if (ye == 0) { return false; }
+  		
+  		return true;
+  	};
+      	
+      	
+	// make sure hours and minutes are valid numbers
+	TG_Date.zeroButt = function (n) {
+		
+		var num = parseInt(n, 10);
+		if (num > 9) {
+			return String(num);
+		} else {
+			return "0" + num;
+		}
+	}
+		
+
+	/*
+	* toFromUTC
+	* transforms TG_Date object to be either in UTC (GMT!) or in non-UTC
+	*
+	* @param ob: {Object} date object including ye, mo, da, etc
+	* @param offset: {Object} eg: hours, minutes {Number} x 2
+	*
+	* with offsets made clear. Used for formatting dates at all times
+	* since all event dates are stored in UTC
+	*
+	* @ return {Object} returns SIMPLE DATE OBJECT: not a full TG_Date instance
+	*                   since we don't want the overhead of calculating .rd etc.
+	*/		
+	TG_Date.toFromUTC = function (ob, offset, toFrom) {
+				
+		var nh_dec = 0,
+			lastDays = [0,31,28,31,30,31,30,31,31,30,31,30,31,29],
+			
+			deltaFloatToHM = function (flt){
+				var fl = Math.abs(flt),
+					h = Math.floor(fl),
+					dec = fl - h,
+					m = Math.round(dec * 60);
+				
+				return {"ho":h, "mi":m, "se":0};
+			},
+			delta = {};
+						
+		// Offset is the "timezone setting" on the timeline,
+		// or the timezone to which to translate from UTC
+		if (toFrom == "from") {
+			delta.ho = -1 * offset.hours;
+			delta.mi = -1 * offset.minutes;
+		} else if (toFrom == "to"){
+			delta.ho = offset.hours;
+			delta.mi = offset.minutes;
+		} else {
+			delta.ho = -1 * ob.tz_ho;
+			delta.mi = -1 * ob.tz_mi;
+		}
+	
+		
+		// no change, man!
+		if (delta.ho == 0 && delta.mi ==0) {
+			return ob; 
+		}	
+		
+		// decimal overage or underage after adding offset
+		var ho_delta = (ob.ho + (ob.mi / 60)) + ((-1 * delta.ho) + ((delta.mi * -1) / 60));
+				
+		// FWD OR BACK ?
+		if (ho_delta < 0) {
+			// go back a day
+			nh_dec = 24 + ho_delta;
+		
+			if (ob.da > 1) {
+				ob.da = ob.da - 1;
+			} else { 
+				// day is 1....
+				if (ob.mo == 1) {
+					// & month is JAN, go back to DEC
+					ob.ye = ob.ye - 1; ob.mo = 12; ob.da = 31;
+				} else { 
+					ob.mo = ob.mo-1;
+					// now that we know month, what is the last day number?
+					ob.da = TG_Date.getLastDayOfMonth(ob.ye, ob.mo)
+				}
+			}
+			
+		} else if (ho_delta >= 24) {
+			// going fwd a day
+			nh_dec = ho_delta - 24;			
+
+			if (TG_Date.isLeapYear(ob.ye) && ob.mo == 2 && ob.da==28){
+				ob.da = 29;
+			} else if (ob.da == lastDays[ob.mo]) {
+				if (ob.mo == 12) {
+					ob.ye = ob.ye + 1;
+					ob.mo = 1;
+				} else {
+					ob.mo = ob.mo + 1;
+				}
+				ob.da = 1;
+			} else {
+				ob.da = ob.da + 1;
+			}
+
+		} else {
+			nh_dec = ho_delta;
+		}
+		// delta did not take us from one day to another
+		// only adjust the hour and minute
+		var hm = deltaFloatToHM(nh_dec);
+			ob.ho = hm.ho;
+			ob.mi = hm.mi; 
+			
+		if (!offset) {
+			ob.tz_ho = 0;
+			ob.tz_mi = 0;
+		} else {
+			ob.tz_ho = offset.tz_ho;
+			ob.tz_mi = offset.tz_mi;
+		}
+		
+				
+		////// 
+		// return ob;
+		var retob = {ye:ob.ye, mo:ob.mo, da:ob.da, ho:ob.ho, mi:ob.mi, se:ob.se};
+		
+		return retob;
+		
+		
+	}; // toFromUTC
+	
+	
+	/*
+	 * TGSecToUnixSec
+	 * translates Timeglider seconds to unix-usable
+	 * seconds. Multiply by 1000 to get unix seconds
+	 * for JS dates, etc.
+	 *
+	 * @return {Number} SECONDS (not milliseconds)
+	 *
+	 */
+	TG_Date.TGSecToUnixSec = function(tg_sec) {
+		// 62135686740
+		return tg_sec - (62135686740 - 24867);
+	};
+	
+	
+	
+	TG_Date.timezones = [
+	    {"offset": "-12:00", "name": "Int'l Date Line West"},
+	    {"offset": "-11:00", "name": "Bering & Nome"},
+	    {"offset": "-10:00", "name": "Alaska-Hawaii Standard Time"},
+	    {"offset": "-10:00", "name": "U.S. Hawaiian Standard Time"},
+	    {"offset": "-10:00", "name": "U.S. Central Alaska Time"},
+	    {"offset": "-09:00", "name": "U.S. Yukon Standard Time"},
+	    {"offset": "-08:00", "name": "U.S. Pacific Standard Time"},
+	    {"offset": "-07:00", "name": "U.S. Mountain Standard Time"},
+	    {"offset": "-07:00", "name": "U.S. Pacific Daylight Time"},
+	    {"offset": "-06:00", "name": "U.S. Central Standard Time"},
+	    {"offset": "-06:00", "name": "U.S. Mountain Daylight Time"},
+	    {"offset": "-05:00", "name": "U.S. Eastern Standard Time"},
+	    {"offset": "-05:00", "name": "U.S. Central Daylight Time"},
+	    {"offset": "-04:00", "name": "U.S. Atlantic Standard Time"},
+	    {"offset": "-04:00", "name": "U.S. Eastern Daylight Time"},
+	    {"offset": "-03:30", "name": "Newfoundland Standard Time"},
+	    {"offset": "-03:00", "name": "Brazil Standard Time"},
+	    {"offset": "-03:00", "name": "Atlantic Daylight Time"},
+	    {"offset": "-03:00", "name": "Greenland Standard Time"},
+	    {"offset": "-02:00", "name": "Azores Time"},
+	    {"offset": "-01:00", "name": "West Africa Time"},
+	    {"offset": "00:00", "name": "Greenwich Mean Time/UTC"},
+	    {"offset": "00:00", "name": "Western European Time"},
+	    {"offset": "01:00", "name": "Central European Time"},
+	    {"offset": "01:00", "name": "Middle European Time"},
+	    {"offset": "01:00", "name": "British Summer Time"},
+	    {"offset": "01:00", "name": "Middle European Winter Time"},
+	    {"offset": "01:00", "name": "Swedish Winter Time"},
+	    {"offset": "01:00", "name": "French Winter Time"},
+	    {"offset": "02:00", "name": "Eastean EU"},
+	    {"offset": "02:00", "name": "USSR-zone1"},
+	    {"offset": "02:00", "name": "Middle European Summer Time"},
+	    {"offset": "02:00", "name": "French Summer Time"},
+	    {"offset": "03:00", "name": "Baghdad Time"},
+	    {"offset": "03:00", "name": "USSR-zone2"},
+	    {"offset": "03:30", "name": "Iran"},
+	    {"offset": "04:00", "name": "USSR-zone3"},
+	    {"offset": "05:00", "name": "USSR-zone4"},
+	    {"offset": "05:30", "name": "Indian Standard Time"},
+	    {"offset": "06:00", "name": "USSR-zone5"},
+	    {"offset": "06:30", "name": "North Sumatra Time"},
+	    {"offset": "07:00", "name": "USSR-zone6"},
+	    {"offset": "07:00", "name": "West Australian Standard Time"},
+	    {"offset": "07:30", "name": "Java"},
+	    {"offset": "08:00", "name": "China & Hong Kong"},
+	    {"offset": "08:00", "name": "USSR-zone7"},
+	    {"offset": "08:00", "name": "West Australian Daylight Time"},
+	    {"offset": "09:00", "name": "Japan"},
+	    {"offset": "09:00", "name": "Korea"},
+	    {"offset": "09:00", "name": "USSR-zone8"},
+	    {"offset": "09:30", "name": "South Australian Standard Time"},
+	    {"offset": "09:30", "name": "Central Australian Standard Time"},
+	    {"offset": "10:00", "name": "Guam Standard Time"},
+	    {"offset": "10:00", "name": "USSR-zone9"},
+	    {"offset": "10:00", "name": "East Australian Standard Time"},
+	    {"offset": "10:30", "name": "Central Australian Daylight Time"},
+	    {"offset": "10:30", "name": "South Australian Daylight Time"},
+	    {"offset": "11:00", "name": "USSR-zone10"},
+	    {"offset": "11:00", "name": "East Australian Daylight Time"},
+	    {"offset": "12:00", "name": "New Zealand Standard Time"},
+	    {"offset": "12:00", "name": "Int'l Date Line East"},
+	    {"offset": "13:00", "name": "New Zealand Daylight Time"}
+	];
+
+
+
+        /*
+        * boil
+        * basic wrapper for parseInt to clean leading zeros,
+        * as in dates
+        */
+      	function boil (n) {
+      		return parseInt(n, 10);
+      	}; TG_Date.boil = boil;
+      	
+      	function unboil (n) {
+      		var no = parseInt(n, 10);
+      		if (no > 9 || no < 0) {
+      			return String(n);
+      		} else {
+      			return "0" + no;
+      		}
+      	}; TG_Date.unboil = unboil;
+
+
+      	function getSec (fd) {
+      		      		
+      		var daSec = Math.abs(fd.rd) * 86400;
+      		var hoSec = (fd.ho) * 3600;
+      		var miSec = (fd.mi - 1) * 60;
+      		var bc = (fd.rd > 0) ? 1 : -1;
+      		var ret = bc * (daSec + hoSec + miSec);
+      		
+      		return ret;
+      	};
+
+
+  
+        /* getMoNum
+        *
+        * @param mo {Number} month from 1 to 12
+        * @param ye {Number} straight year
+        *
+        */ 
+        function getMoNum (ob) {
+        	    if (ob.ye > 0) {
+        			return  ((ob.ye -1) * 12) + ob.mo;
+        		} else {
+        			return getMoNumBC(ob.mo, ob.ye);
+        		}
+        };
+  
+        /*
+        * getMoNumBC
+        * In BC time, serial numbers for months are going backward
+        * starting with December of 1 bce. So, a month that is actually
+        * "month 12 of year -1" is actually just -1, and November of 
+        * year 1 bce is -2. Capiche!?
+        *
+        * @param {object} ob ---> .ye (year)  .mo (month)
+        * @return {number} serial month number (negative in this case)
+        */
+        function getMoNumBC (mo, ye) {
+        	var absYe = Math.abs(ye);
+        	var n = ((absYe - 1) * 12) + (12-(mo -1));
+        	return -1 * n;
+        };
+        
+
+
+		function show(ob){
+			return ob.ye + "-" + ob.mo + "-" + ob.da + " " + ob.ho + ":" + ob.mi;
+		}
+		
+
   
 })(timeglider);
-
-
 

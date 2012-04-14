@@ -1,454 +1,561 @@
 [
-{
-"id":"audiohist",
-"title":"Eine kurze Geschichte des Musikhörens auf dem Computer",
-"description":"<p>Das MP3-Format hat vor wenigen Wochen seinen 18. Geburtstag gefeiert und ist somit endlich &quot;erwachsen&quot; geworden. Seit 1993 das MP3-Format veröffentlicht wurde, hat sich die Musik zunehmend vom physischen Datenträger gelöst und ist immer mehr ins Internet gewandert.</p><p>Ich möchte die wichtigsten Technologien, Audioplayer, Social Networks und Onlineshops, die in den letzten zwei Jahrzehnten entstanden sind und das Musikhören revolutioniert haben, veranschaulichen. Neben dem Rückblick möchte ich mit euch den Status Quo feststellen und über die Zukunft von Musikdiensten, Audioplayern und Technologien diskutieren.</p><p>Außerdem möchte ich ein OSS-Projekt vorstellen, das viele der neuesten Technologien &quot;unter einem Dach&quot; vereint und einen (meiner Meinung nach) vielversprechenden Ansatz für die nahe Zukunft zeigt.</p>",
-"focus_date":"1993-01-01 12:00:00",
-"initial_zoom":"34",
-"events":[
+    {
+        "id":"audiohist",
+        "title":"Eine kurze Geschichte des Musikhörens auf dem Computer",
+        "description":"<p>Das MP3-Format hat vor wenigen Wochen seinen 18. Geburtstag gefeiert und ist somit endlich &quot;erwachsen&quot; geworden. Seit 1993 das MP3-Format veröffentlicht wurde, hat sich die Musik zunehmend vom physischen Datenträger gelöst und ist immer mehr ins Internet gewandert.</p><p>Ich möchte die wichtigsten Technologien, Audioplayer, Social Networks und Onlineshops, die in den letzten zwei Jahrzehnten entstanden sind und das Musikhören revolutioniert haben, veranschaulichen. Neben dem Rückblick möchte ich mit euch den Status Quo feststellen und über die Zukunft von Musikdiensten, Audioplayern und Technologien diskutieren.</p><p>Außerdem möchte ich ein OSS-Projekt vorstellen, das viele der neuesten Technologien &quot;unter einem Dach&quot; vereint und einen (meiner Meinung nach) vielversprechenden Ansatz für die nahe Zukunft zeigt.</p>",
+        "focus_date":"2012-05-11 12:00:00",
+        "timezone":"+01:00",
+        "initial_zoom":"28",
+        "events":[
 
-{
-"id":"audiohist-itunes",
-"title": "iTunes",
-"description":"<p>iTunes ist ein Multimedia-Verwaltungsprogramm von Apple zum Abspielen, Konvertieren, Organisieren und Kaufen von Musik, Hörbüchern, Podcasts, Filmen, iPhone- und iPad-Apps und Spielen.</p>",
-"startdate": "2001-01-01 12:00",
-"importance":"100",
-"date_display":"year",
-"link":"http://www.apple.com/",
-"icon":"../../../icons/playersoftware.png"
-},
+            {
+                "id":"itunes",
+                "title":"iTunes",
+                "description":"<p>iTunes ist ein Multimedia-Verwaltungsprogramm von Apple zum Abspielen, Konvertieren, Organisieren und Kaufen von Musik, Hörbüchern, Podcasts, Filmen, iPhone- und iPad-Apps und Spielen.</p>",
+                "startdate":"2001-01-01 12:00",
+                "importance":"100",
+                "date_display":"year",
+                "link":"http://www.apple.com/",
+                "icon":"../../../icons/playersoftware.png"
+            },
 
-{
-"id":"audiohist-itunes-store",
-"title": "iTunes Store",
-"description": "<p>Der iTunes Store ist eine 2003 gestartete Internet-Handelsplattform, die neben einem Online-Musik- und Filmgeschäft auch Spiele für iPod, iPhone, iPod touch und iPad anbietet. Der ITunes Store ist auch auf Computer nutzbar, dort ist Apples iTunes-Software notwendig.</p>",
-"startdate": "2003-04-30 12:00:00",
-"link":"http://www.apple.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/shopping.png"
-},
+            {
+                "id":"itunes-store",
+                "title":"iTunes Store",
+                "description":"<p>Der iTunes Store ist eine 2003 gestartete Internet-Handelsplattform, die neben einem Online-Musik- und Filmgeschäft auch Spiele für iPod, iPhone, iPod touch und iPad anbietet. Der ITunes Store ist auch auf Computer nutzbar, dort ist Apples iTunes-Software notwendig.</p>",
+                "startdate":"2003-04-30 12:00:00",
+                "link":"http://www.apple.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/shopping.png"
+            },
 
-{
-"id":"audiohist-real",
-"title": "RealAudio Player",
-"description": "<p>Der RealPlayer ist ein Medienspieler des Unternehmens RealNetworks, ein Computerprogramm zum Abspielen von Video- und Audiodateien. Frühere Versionen des RealPlayers hießen auch RealOne Player oder RealAudio Player.</p><p>RealAudio ist ein Audiodateiformat von RealMedia, das vorwiegend für Audio-Datenströme (Streaming Audio) eingesetzt wird.</p>",
-"startdate": "1995-04-01 12:00:00",
-"link":"http://germany.real.com/player/win/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/playersoftware.png"
-},
+            {
+                "id":"real",
+                "title":"RealAudio Player",
+                "description":"<p>Der RealPlayer ist ein Medienspieler des Unternehmens RealNetworks, ein Computerprogramm zum Abspielen von Video- und Audiodateien. Frühere Versionen des RealPlayers hießen auch RealOne Player oder RealAudio Player.</p><p>RealAudio ist ein Audiodateiformat von RealMedia, das vorwiegend für Audio-Datenströme (Streaming Audio) eingesetzt wird.</p>",
+                "startdate":"1995-04-01 12:00:00",
+                "link":"http://germany.real.com/player/win/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/playersoftware.png"
+            },
 
-{
-"id":"audiohist-mp3",
-"title": "MP3",
-"description": "<p>MP3 (MPEG-1 Audio Layer III oder MPEG-2 Audio Layer III) ist ein Verfahren zur verlustbehafteten Kompression digital gespeicherter Audiodaten. MP3 bedient sich dabei der Psychoakustik mit dem Ziel, nur für den Menschen bewusst hörbare Audiosignale zu speichern. Dadurch wird eine Reduzierung der Datenmenge möglich, die die wahrgenommene Audioqualität nicht oder nur kaum verringert.</p><p>MP3 ist das dominierende Verfahren zur Speicherung und Übertragung von Musik auf Computern und im Internet, obwohl es mittlerweile eine Anzahl von technisch weiterentwickelten Alternativen gibt.</p>",
-"startdate": "1993-04-01 12:00:00",
-"link":"http://www.iis.fraunhofer.de/bf/amm/produkte/audiocodec/audiocodecs/mp3/index.jsp",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/fileformats.png"
-},
+            {
+                "id":"mp3",
+                "title":"MP3",
+                "description":"<p>MP3 (MPEG-1 Audio Layer III oder MPEG-2 Audio Layer III) ist ein Verfahren zur verlustbehafteten Kompression digital gespeicherter Audiodaten. MP3 bedient sich dabei der Psychoakustik mit dem Ziel, nur für den Menschen bewusst hörbare Audiosignale zu speichern. Dadurch wird eine Reduzierung der Datenmenge möglich, die die wahrgenommene Audioqualität nicht oder nur kaum verringert.</p><p>MP3 ist das dominierende Verfahren zur Speicherung und Übertragung von Musik auf Computern und im Internet, obwohl es mittlerweile eine Anzahl von technisch weiterentwickelten Alternativen gibt.</p>",
+                "startdate":"1993-04-01 12:00:00",
+                "link":"http://www.iis.fraunhofer.de/bf/amm/produkte/audiocodec/audiocodecs/mp3/index.jsp",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/fileformats.png"
+            },
 
-{
-"id":"audiohist-ogg",
-"title": "Ogg Vorbis",
-"description": "<p>Vorbis (im entsprechenden Containerformat auch als Ogg Vorbis bezeichnet) ist ein (patent-)freies Audioformat für verlustbehaftet komprimierte Audiodaten. Das Format wurde von der Xiph.Org Foundation als patentfreie Alternative zum weit verbreiteten MP3-Format für eine vorgesehene Lebensspanne von etwa 20 Jahren entwickelt.</p>",
-"startdate": "2002-07-12 12:00:00",
-"link":"http://www.vorbis.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/fileformats.png"
-},
+            {
+                "id":"ogg",
+                "title":"Ogg Vorbis",
+                "description":"<p>Vorbis (im entsprechenden Containerformat auch als Ogg Vorbis bezeichnet) ist ein (patent-)freies Audioformat für verlustbehaftet komprimierte Audiodaten. Das Format wurde von der Xiph.Org Foundation als patentfreie Alternative zum weit verbreiteten MP3-Format für eine vorgesehene Lebensspanne von etwa 20 Jahren entwickelt.</p>",
+                "startdate":"2002-07-12 12:00:00",
+                "link":"http://www.vorbis.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/fileformats.png"
+            },
 
-{
-"id":"audiohist-flac",
-"title": "FLAC",
-"description": "<p>Free Lossless Audio Codec (FLAC), zu Deutsch Freier verlustfreier Audio-Kodierer/-Dekodierer, ist ein Codec zur verlustfreien Audiodatenkompression, der im Rahmen der Xiph.Org Foundation entwickelt wird. Er ist frei verfügbar und in seiner Nutzung nicht durch Softwarepatente beschränkt.</p>",
-"startdate": "2001-07-20 12:00:00",
-"link":"http://flac.sourceforge.net/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/fileformats.png"
-},
+            {
+                "id":"flac",
+                "title":"FLAC",
+                "description":"<p>Free Lossless Audio Codec (FLAC), zu Deutsch Freier verlustfreier Audio-Kodierer/-Dekodierer, ist ein Codec zur verlustfreien Audiodatenkompression, der im Rahmen der Xiph.Org Foundation entwickelt wird. Er ist frei verfügbar und in seiner Nutzung nicht durch Softwarepatente beschränkt.</p>",
+                "startdate":"2001-07-20 12:00:00",
+                "link":"http://flac.sourceforge.net/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/fileformats.png"
+            },
 
-{
-"id":"audiohist-itunes8",
-"title": "iTunes 8 mit Genius",
-"description": "<h2>Genius</h2><p>Die neue Funktionalität Genius erschien mit der Version 8 von iTunes. Mit dieser Funktion ist es möglich, Wiedergabelisten mit nach Apples Ansicht &quot;gut zueinander passenden&quot; (songs that go great together) Titeln zu erstellen.</p><p>Wenn die Genius-Funktion das erste Mal gestartet wird, werden Informationen über die iTunes-Musik-Bibliothek an Apple gesendet. Die eigenen Informationen werden mit denen von anderen Genius-Nutzern verglichen und an den Benutzer zurückgesendet. Spielt man nun ein Lied in iTunes und klickt auf den Genius-Button, kreiert iTunes sofort eine neue Playlist mit Titeln, die alle 'gut zueinander passen'. Die Art der Musik bezieht sich dann immer auf den vorher ausgewählten Titel.</p><p>Das Senden der Daten über die eigene iTunes-Musik-Bibliothek ist laut Apple völlig anonym.</p><p>Zudem gibt es die Genius Sidebar. Wird ein Titel abgespielt, zeigt die Sidebar Angebote aus dem iTunes-Store für ähnliche Titel.</p>",
-"startdate": "2008-09-09 12:00:00",
-"link":"http://www.apple.com/de/itunes/overview",
-"importance":"70",
-"date_display":"month",
-"icon":"../../../icons/audiolibs.png"
-},
+            {
+                "id":"itunes8",
+                "title":"iTunes 8 mit Genius",
+                "description":"<h2>Genius</h2><p>Die neue Funktionalität Genius erschien mit der Version 8 von iTunes. Mit dieser Funktion ist es möglich, Wiedergabelisten mit nach Apples Ansicht &quot;gut zueinander passenden&quot; (songs that go great together) Titeln zu erstellen.</p><p>Wenn die Genius-Funktion das erste Mal gestartet wird, werden Informationen über die iTunes-Musik-Bibliothek an Apple gesendet. Die eigenen Informationen werden mit denen von anderen Genius-Nutzern verglichen und an den Benutzer zurückgesendet. Spielt man nun ein Lied in iTunes und klickt auf den Genius-Button, kreiert iTunes sofort eine neue Playlist mit Titeln, die alle 'gut zueinander passen'. Die Art der Musik bezieht sich dann immer auf den vorher ausgewählten Titel.</p><p>Das Senden der Daten über die eigene iTunes-Musik-Bibliothek ist laut Apple völlig anonym.</p><p>Zudem gibt es die Genius Sidebar. Wird ein Titel abgespielt, zeigt die Sidebar Angebote aus dem iTunes-Store für ähnliche Titel.</p>",
+                "startdate":"2008-09-09 12:00:00",
+                "link":"http://www.apple.com/de/itunes/overview",
+                "importance":"70",
+                "date_display":"month",
+                "icon":"../../../icons/audiolibs.png"
+            },
 
-{
-"id":"audiohist-itunes10",
-"title": "iTunes 10 mit Ping",
-"description": "<p>Ping ist ein ab der Version 10 enthaltenes Social Network, bereitgestellt durch Apple, auf dem sich Nutzer über Musik und ihre Interessen sowie gekaufte Musik austauschen können. Ähnlich wie bei den großen Social Networks Facebook und Twitter kann man Künstlern oder anderen Benutzern, die angemeldet sind, &quot;folgen&quot; und damit sein Interesse an deren Musik zeigen bzw. verfolgen welche Interessen andere Benutzer haben.</p>",
-"startdate": "2010-09-01 12:00:00",
-"link":"http://www.apple.com/de/itunes/overview",
-"importance":"70",
-"date_display":"month",
-"icon":"../../../icons/socialnetworks.png"
-},
+            {
+                "id":"itunes10",
+                "title":"iTunes 10 mit Ping",
+                "description":"<p>Ping ist ein ab der Version 10 enthaltenes Social Network, bereitgestellt durch Apple, auf dem sich Nutzer über Musik und ihre Interessen sowie gekaufte Musik austauschen können. Ähnlich wie bei den großen Social Networks Facebook und Twitter kann man Künstlern oder anderen Benutzern, die angemeldet sind, &quot;folgen&quot; und damit sein Interesse an deren Musik zeigen bzw. verfolgen welche Interessen andere Benutzer haben.</p>",
+                "startdate":"2010-09-01 12:00:00",
+                "link":"http://www.apple.com/de/itunes/overview",
+                "importance":"70",
+                "date_display":"month",
+                "icon":"../../../icons/socialnetworks.png"
+            },
 
-{
-"id":"audiohist-google-music",
-"title": "Google Music Beta",
-"description": "<p><img src='img/Music_Beta_by_Google_logo.png'/>Music Beta by Google is an online music streaming service that was announced on 10 May 2011 at the Google I/O conference. The service supports streaming music to desktop browsers and Android phones and tablets, or any other device that can use the Adobe Flash platform. It is currently only available to Android users in the United States of America.</p>",
-"startdate": "2011-05-10 12:00:00",
-"link":"http://music.google.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"google-music",
+                "title":"Google Music Beta",
+                "description":"<p><img src='img/Music_Beta_by_Google_logo.png'/>Music Beta by Google is an online music streaming service that was announced on 10 May 2011 at the Google I/O conference. The service supports streaming music to desktop browsers and Android phones and tablets, or any other device that can use the Adobe Flash platform. It is currently only available to Android users in the United States of America.</p>",
+                "startdate":"2011-05-10 12:00:00",
+                "link":"http://music.google.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-spotify",
-"title": "Spotify",
-"description": "<p><a href='http://de.wikipedia.org/wiki/Spotify'><img src='img/Spotify_logo.png'/>Spotify</a> ist eine unentgeltlich erhältliche Musik-Streaming-Software, die eine mehrfach verschlüsselte Direktübertragung von Musikstücken ohne Verzögerung ermöglicht.</p>",
-"startdate": "2008-10-07 12:00:00",
-"link":"http://www.spotify.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"spotify",
+                "title":"Spotify",
+                "description":"<p><a href='http://de.wikipedia.org/wiki/Spotify'><img src='img/Spotify_logo.png'/>Spotify</a> ist eine unentgeltlich erhältliche Musik-Streaming-Software, die eine mehrfach verschlüsselte Direktübertragung von Musikstücken ohne Verzögerung ermöglicht.</p>",
+                "startdate":"2008-10-07 12:00:00",
+                "link":"http://www.spotify.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-simfy",
-"title": "Simfy",
-"description": "<h2>Simfy startet Streaming-Angebot</h2><p><img src='img/200px-Simfy.svg.png'/>Die simfy AG betreibt ein deutsches Webportal, über das man sich Musik anhören kann. Zwischen den Liedern wird Werbung abgespielt. Nutzer haben die Möglichkeit, sich einen Premium-Account anzulegen, um werbefrei Musik zu hören. Zudem bietet Simfy für seine Nutzer eine Desktop-, eine iPhone- und eine Android-App an.</p>",
-"startdate": "2010-05-03 12:00:00",
-"link":"http://de.wikipedia.org/wiki/Spotify",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"simfy",
+                "title":"Simfy",
+                "description":"<h2>Simfy startet Streaming-Angebot</h2><p><img src='img/200px-Simfy.svg.png'/>Die simfy AG betreibt ein deutsches Webportal, über das man sich Musik anhören kann. Zwischen den Liedern wird Werbung abgespielt. Nutzer haben die Möglichkeit, sich einen Premium-Account anzulegen, um werbefrei Musik zu hören. Zudem bietet Simfy für seine Nutzer eine Desktop-, eine iPhone- und eine Android-App an.</p>",
+                "startdate":"2010-05-03 12:00:00",
+                "link":"http://de.wikipedia.org/wiki/Spotify",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-lastfm",
-"title": "last.fm",
-"description": "<h2><a href='http://de.wikipedia.org/wiki/Last.fm'>last.fm</a> online (in seiner heutigen Form)</h2><p><img src='img/200px-Last.fm_Logo.svg.png'/>Last.fm ist ein Internetradio auf Basis von sozialer Software, das entwickelt wurde, um Nutzern aufgrund ihrer Hörgewohnheiten neue Musik, Menschen mit ähnlichem Musikgeschmack und Konzerte in ihrer Umgebung empfehlen zu können. Es ist eine ehemalige Schwesterseite von Audioscrobbler, mit dem es sich früher eine Musikdatenbank teilte.</p>",
-"startdate": "2003-01-01 12:00:00",
-"link":"http://www.lastfm.de/",
-"importance":"100",
-"icon":"../../../icons/audiolibs.png"
-},
+            {
+                "id":"lastfm",
+                "title":"last.fm",
+                "description":"<h2><a href='http://de.wikipedia.org/wiki/Last.fm'>last.fm</a> online (in seiner heutigen Form)</h2><p><img src='img/200px-Last.fm_Logo.svg.png'/>Last.fm ist ein Internetradio auf Basis von sozialer Software, das entwickelt wurde, um Nutzern aufgrund ihrer Hörgewohnheiten neue Musik, Menschen mit ähnlichem Musikgeschmack und Konzerte in ihrer Umgebung empfehlen zu können. Es ist eine ehemalige Schwesterseite von Audioscrobbler, mit dem es sich früher eine Musikdatenbank teilte.</p>",
+                "startdate":"2003-01-01 12:00:00",
+                "link":"http://www.lastfm.de/",
+                "importance":"100",
+                "icon":"../../../icons/audiolibs.png"
+            },
 
-{
-"id":"audiohist-napster-p2p",
-"title": "Napster P2P-Filesharing",
-"description": "<p>Napster war eine Musiktauschbörse, die 1998 von Shawn Fanning programmiert wurde. Sie sollte dem Zwecke dienen, leichter MP3-Musikdateien über das Internet austauschen zu können. Benannt nach dem Frisur-bezogenen (nap = Mittagsschlaf) Spitznamen Fannings.</p>",
-"startdate": "1999-06-01 12:00:00",
-"enddate": "2001-07-01 12:00:00",
-"link":"http://en.wikipedia.org/wiki/Napster",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/p2p.png"
-},
+            {
+                "id":"napster-p2p",
+                "title":"Napster P2P-Filesharing",
+                "description":"<p>Napster war eine Musiktauschbörse, die 1998 von Shawn Fanning programmiert wurde. Sie sollte dem Zwecke dienen, leichter MP3-Musikdateien über das Internet austauschen zu können. Benannt nach dem Frisur-bezogenen (nap = Mittagsschlaf) Spitznamen Fannings.</p>",
+                "startdate":"1999-06-01 12:00:00",
+                "enddate":"2001-07-01 12:00:00",
+                "link":"http://en.wikipedia.org/wiki/Napster",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/p2p.png"
+            },
 
-{
-"id":"audiohist-napster-20",
-"title": "Napster 2.0",
-"description": "<h2>Napster 2.0 als Bezahlangebot</h2><p><img src='img/200px-Napster_Logo.svg.png'/>Napster, Inc. ist ein US-amerikanisches, börsennotiertes Unternehmen, das in mehreren Ländern einen Online-Musikdienst anbietet, der auch Abonnement-Angebote umfasst. Napster konkurriert mit iTunes Music Store, Rhapsody, Musicload und anderen. Der Name und das Firmenlogo stammen von der bekannten Peer-to-Peer Musiktauschbörse Napster, die im Juli 2001 nach rechtlichen Streitigkeiten geschlossen wurde.</p>",
-"startdate": "2003-10-29 12:00:00",
-"link":"http://de.wikipedia.org/wiki/Napster_(Online-Musikdienst)",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"napster-20",
+                "title":"Napster 2.0",
+                "description":"<h2>Napster 2.0 als Bezahlangebot</h2><p><img src='img/200px-Napster_Logo.svg.png'/>Napster, Inc. ist ein US-amerikanisches, börsennotiertes Unternehmen, das in mehreren Ländern einen Online-Musikdienst anbietet, der auch Abonnement-Angebote umfasst. Napster konkurriert mit iTunes Music Store, Rhapsody, Musicload und anderen. Der Name und das Firmenlogo stammen von der bekannten Peer-to-Peer Musiktauschbörse Napster, die im Juli 2001 nach rechtlichen Streitigkeiten geschlossen wurde.</p>",
+                "startdate":"2003-10-29 12:00:00",
+                "link":"http://de.wikipedia.org/wiki/Napster_(Online-Musikdienst)",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-numblog",
-"title": "New Urban Music Blog",
-"description": "<h2>Mein Blog ;-)</h2>",
-"startdate": "2005-03-25 12:00:00",
-"link":"http://www.numblog.de/",
-"importance":"100",
-"date_display":"day",
-"icon":"../../../icons/blogs.png"
-},
+            {
+                "id":"numblog",
+                "title":"New Urban Music Blog",
+                "description":"<h2>Mein Blog ;-)</h2>",
+                "startdate":"2005-03-25 12:00:00",
+                "link":"http://www.numblog.de/",
+                "importance":"100",
+                "date_display":"day",
+                "icon":"../../../icons/blogs.png"
+            },
 
-{
-"id":"audiohist-fmc2011",
-"title": "#fmc2011",
-"description": "Future Music Camp 2011",
-"startdate": "2011-05-27 09:00:00",
-"enddate": "2011-05-28 18:00:00",
-"link":"http://www.futuremusiccamp.com/",
-"importance":"100",
-"date_display":"day",
-"icon":"../../../img/fmc2011.jpg"
-},
+            {
+                "id":"fmc2011",
+                "title":"#fmc2011",
+                "description":"Future Music Camp 2011",
+                "startdate":"2011-05-27 09:00:00",
+                "enddate":"2011-05-28 18:00:00",
+                "link":"http://www.futuremusiccamp.com/",
+                "importance":"100",
+                "date_display":"day",
+                "icon":"../../../img/fmc2011.jpg"
+            },
 
-{
-"id":"audiohist-amazonmp3",
-"title": "Amazon MP3",
-"description": "<h2>AmazonMP3 startet in den USA.</h2><p><img src='img/amazonmp3-shop.gif'/></p>",
-"startdate": "2007-09-25 12:00:00",
-"link":"http://de.wikipedia.org/wiki/Amazon.com#Geschichte",
-"importance":"100",
-"icon":"../../../icons/shopping.png",
-"date_display":"month"
-},
+            {
+                "id":"amazonmp3",
+                "title":"Amazon MP3",
+                "description":"<h2>AmazonMP3 startet in den USA.</h2><p><img src='img/amazonmp3-shop.gif'/></p>",
+                "startdate":"2007-09-25 12:00:00",
+                "link":"http://de.wikipedia.org/wiki/Amazon.com#Geschichte",
+                "importance":"100",
+                "icon":"../../../icons/shopping.png",
+                "date_display":"month"
+            },
 
-{
-"id":"audiohist-ipod",
-"title": "iPod",
-"description": "<p>iPod ist die Bezeichnung einer Serie von tragbaren digitalen Medienabspielgeräten des Unternehmens Apple, den sogenannten &quot;Portable Media Playern&quot;. Sie sind die weltweit meistverkauften tragbaren Musikabspieler. Seit Einführung der fünften iPod-Generation ist auch die Wiedergabe von Videodateien möglich.</p>",
-"startdate": "2001-10-23 12:00:00",
-"link":"http://de.wikipedia.org/wiki/IPod#Geschichte",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/playerdevices.png"
-},
+            {
+                "id":"ipod",
+                "title":"iPod",
+                "description":"<p>iPod ist die Bezeichnung einer Serie von tragbaren digitalen Medienabspielgeräten des Unternehmens Apple, den sogenannten &quot;Portable Media Playern&quot;. Sie sind die weltweit meistverkauften tragbaren Musikabspieler. Seit Einführung der fünften iPod-Generation ist auch die Wiedergabe von Videodateien möglich.</p>",
+                "startdate":"2001-10-23 12:00:00",
+                "link":"http://de.wikipedia.org/wiki/IPod#Geschichte",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/playerdevices.png"
+            },
 
-{
-"id":"audiohist-amarok",
-"title": "Amarok",
-"description": "<h2>Amarok erscheint</h2><p><img src='img/200px-Amarok_logo.svg.png'/>Amarok ist eine grafische freie Software für unixoide Betriebssysteme und Microsoft Windows zum Abspielen von Audiodateien und um diese beliebig zu ordnen, sortieren und zu gruppieren. Auch Podcasts und Audiostreams wie Internetradios können verwaltet und abgespielt werden.</p>",
-"startdate": "2003-07-20 12:00:00",
-"link":"http://de.wikipedia.org/wiki/Amarok_(Software)#Versionen_und_Versionsgeschichte",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/playersoftware.png"
-},
+            {
+                "id":"amarok",
+                "title":"Amarok",
+                "description":"<h2>Amarok erscheint</h2><p><img src='img/200px-Amarok_logo.svg.png'/>Amarok ist eine grafische freie Software für unixoide Betriebssysteme und Microsoft Windows zum Abspielen von Audiodateien und um diese beliebig zu ordnen, sortieren und zu gruppieren. Auch Podcasts und Audiostreams wie Internetradios können verwaltet und abgespielt werden.</p>",
+                "startdate":"2003-07-20 12:00:00",
+                "link":"http://de.wikipedia.org/wiki/Amarok_(Software)#Versionen_und_Versionsgeschichte",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/playersoftware.png"
+            },
 
-{
-"id":"audiohist-musicload",
-"title": "Musicload",
-"description": "<h2>Musicload geht online</h2><p><img src='img/200px-Musicload-Logo.svg.png'/>Musicload ist ein im Oktober 2003 gestarteter Musikdownloadshop der Telekommunikationsfirma Deutsche Telekom. Die Preise einzelner Lieder liegen zwischen 0,79 und 1,99 Euro. Maxis und Lieder über 4 Minuten Spieldauer aus dem Jazz- und Klassikbereich kosten bis 3,69 Euro. Es gibt auch Sammlungen und komplette Alben, hier liegen die Preise zwischen 4,99 und 12,95 Euro. Mit Musicload Nonstop ist auch eine Musik-Flatrate seit 2006 im Angebot.</p>",
-"startdate": "2003-10-01 12:00:00",
-"link":"http://www.musicload.de/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/shopping.png"
-},
+            {
+                "id":"musicload",
+                "title":"Musicload",
+                "description":"<h2>Musicload geht online</h2><p><img src='img/200px-Musicload-Logo.svg.png'/>Musicload ist ein im Oktober 2003 gestarteter Musikdownloadshop der Telekommunikationsfirma Deutsche Telekom. Die Preise einzelner Lieder liegen zwischen 0,79 und 1,99 Euro. Maxis und Lieder über 4 Minuten Spieldauer aus dem Jazz- und Klassikbereich kosten bis 3,69 Euro. Es gibt auch Sammlungen und komplette Alben, hier liegen die Preise zwischen 4,99 und 12,95 Euro. Mit Musicload Nonstop ist auch eine Musik-Flatrate seit 2006 im Angebot.</p>",
+                "startdate":"2003-10-01 12:00:00",
+                "link":"http://www.musicload.de/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/shopping.png"
+            },
 
-{
-"id":"audiohist-musicload-nonstop",
-"title": "Musicload Nonstop",
-"description": "<h2>Musicload Nonstop startet als Streaming-Angebot</h2>",
-"startdate": "2006-09-18 12:00:00",
-"link":"http://www.musicload.de/hilfe/musicloadnonstop.ml",
-"importance":"70",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"musicload-nonstop",
+                "title":"Musicload Nonstop",
+                "description":"<h2>Musicload Nonstop startet als Streaming-Angebot</h2>",
+                "startdate":"2006-09-18 12:00:00",
+                "link":"http://www.musicload.de/hilfe/musicloadnonstop.ml",
+                "importance":"70",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-musicload-ubuntu-one-music-store",
-"title": "Ubuntu One Music Store",
-"description": "<p><img src='img/200px-Ubuntu_One_Logo_U1.svg.png'/>Der Ubuntu One Music Store (in Kooperation mit 7digital) enthält MP3-enkodierte Lieder in 256 kbps oder höherer Bitrate ohne DRM. Die Einbindung in Ubuntu erfolgt direkt über den GNOME-Musikspieler Rhythmbox oder über Banshee mittels einer Erweiterung. Gekaufte Lieder werden neben dem lokalen Download auch in den Online-Speicherplatz des Nutzers überführt und können mit jedem angeschlossenen Computer synchronisiert werden. Je nach gebuchtem Paket ist von dort auch Streaming auf ein Mobiltelefon möglich.</p>",
-"startdate": "2010-03-23 12:00:00",
-"link":"https://one.ubuntu.com/music/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/shopping.png"
-},
+            {
+                "id":"musicload-ubuntu-one-music-store",
+                "title":"Ubuntu One Music Store",
+                "description":"<p><img src='img/200px-Ubuntu_One_Logo_U1.svg.png'/>Der Ubuntu One Music Store (in Kooperation mit 7digital) enthält MP3-enkodierte Lieder in 256 kbps oder höherer Bitrate ohne DRM. Die Einbindung in Ubuntu erfolgt direkt über den GNOME-Musikspieler Rhythmbox oder über Banshee mittels einer Erweiterung. Gekaufte Lieder werden neben dem lokalen Download auch in den Online-Speicherplatz des Nutzers überführt und können mit jedem angeschlossenen Computer synchronisiert werden. Je nach gebuchtem Paket ist von dort auch Streaming auf ein Mobiltelefon möglich.</p>",
+                "startdate":"2010-03-23 12:00:00",
+                "link":"https://one.ubuntu.com/music/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/shopping.png"
+            },
 
-{
-"id":"audiohist-youtube",
-"title": "YouTube",
-"description": "<p><img src='img/200px-YouTube.svg.png'/>YouTube ist ein 2005 gegründetes Internet-Videoportal mit Sitz in San Bruno, Kalifornien, auf dem die Benutzer kostenlos Video-Clips ansehen und hochladen können. Das Unternehmen wurde am 9. Oktober 2006 von Google übernommen.</p><p>Auf der Internetpräsenz befinden sich Film- und Fernsehausschnitte, Musikvideos sowie selbstgedrehte Filme. Sogenannte „Video-Feeds“ können in Blogs gepostet oder auch einfach auf Webseiten über eine Programmierschnittstelle (API) eingebunden werden.</p>",
-"startdate": "2005-02-15 12:00:00",
-"link":"http://www.youtube.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"youtube",
+                "title":"YouTube",
+                "description":"<p><img src='img/200px-YouTube.svg.png'/>YouTube ist ein 2005 gegründetes Internet-Videoportal mit Sitz in San Bruno, Kalifornien, auf dem die Benutzer kostenlos Video-Clips ansehen und hochladen können. Das Unternehmen wurde am 9. Oktober 2006 von Google übernommen.</p><p>Auf der Internetpräsenz befinden sich Film- und Fernsehausschnitte, Musikvideos sowie selbstgedrehte Filme. Sogenannte „Video-Feeds“ können in Blogs gepostet oder auch einfach auf Webseiten über eine Programmierschnittstelle (API) eingebunden werden.</p>",
+                "startdate":"2005-02-15 12:00:00",
+                "link":"http://www.youtube.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-mufin",
-"title": "Mufin",
-"description": "<h2>Mufin Player Beta veröffentlicht</h2><p>Mufin analysiert Musik, erkennt den Klang der Songs und speichert die musikalische Essenz eines Tracks. </p>",
-"startdate": "2009-02-26 12:00:00",
-"link":"http://www.mufin.com/de/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/audiolibs.png"
-},
+            {
+                "id":"mufin",
+                "title":"Mufin",
+                "description":"<h2>Mufin Player Beta veröffentlicht</h2><p>Mufin analysiert Musik, erkennt den Klang der Songs und speichert die musikalische Essenz eines Tracks. </p>",
+                "startdate":"2009-02-26 12:00:00",
+                "link":"http://www.mufin.com/de/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/audiolibs.png"
+            },
 
-{
-"id":"audiohist-tomahawk-player",
-"title": "Tomahawk",
-"description": "<h2>Entwicklung des Tomahawk Player auf github beginnt</h2><p><img src='img/blogbuzz_logo.png'/>Stop chasing your music across different machines, services and websites. It's time to take the work out of &quot;play&quot;. If the song you want to listen to is in your local library, it just plays. If the song is on a remote machine, it just plays. If the song is on the web, or available from your subscription service, it just plays. By abstracting a piece of content's metadata from its file location, users can easily share playlists, listening history and more.</p>",
-"startdate": "2010-11-26 12:00:00",
-"link":"https://github.com/tomahawk-player/tomahawk/commits/master?page=43",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/playersoftware.png"
-},
+            {
+                "id":"tomahawk-player",
+                "title":"Tomahawk",
+                "description":"<h2>Entwicklung des Tomahawk Player auf github beginnt</h2><p><img src='img/blogbuzz_logo.png'/>Stop chasing your music across different machines, services and websites. It's time to take the work out of &quot;play&quot;. If the song you want to listen to is in your local library, it just plays. If the song is on a remote machine, it just plays. If the song is on the web, or available from your subscription service, it just plays. By abstracting a piece of content's metadata from its file location, users can easily share playlists, listening history and more.</p>",
+                "startdate":"2010-11-26 12:00:00",
+                "link":"https://github.com/tomahawk-player/tomahawk/commits/master?page=43",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/playersoftware.png"
+            },
 
-{
-"id":"audiohist-soundcloud",
-"title": "Soundcloud",
-"description": "<p><a href='http://de.wikipedia.org/wiki/SoundCloud#Geschichte'><img src='img/200px-SoundCloud_logo.svg.png'/>SoundCloud</a> geht online: SoundCloud is an online audio distribution platform which allows musicians to collaborate, promote and distribute their music.</p><p><a href='http://www.numblog.de/archives/518-SoundCloud.html'>Mein Blogbeitrag von Anfang 2008 über Soundcloud</a></p>",
-"startdate": "2007-08-01 12:00:00",
-"link":"http://www.soundcloud.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"soundcloud",
+                "title":"Soundcloud",
+                "description":"<p><a href='http://de.wikipedia.org/wiki/SoundCloud#Geschichte'><img src='img/200px-SoundCloud_logo.svg.png'/>SoundCloud</a> geht online: SoundCloud is an online audio distribution platform which allows musicians to collaborate, promote and distribute their music.</p><p><a href='http://www.numblog.de/archives/518-SoundCloud.html'>Mein Blogbeitrag von Anfang 2008 über Soundcloud</a></p>",
+                "startdate":"2007-08-01 12:00:00",
+                "link":"http://www.soundcloud.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-mixcloud",
-"title": "Mixcloud",
-"description": "<p>Mixcloud describes itself as the YouTube of radio. It is a website to help simplify the sharing and listening to radio programmes, DJ sets, and Podcasts.</p>",
-"startdate": "2009-09-01 12:00:00",
-"link":"http://www.mixcloud.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"mixcloud",
+                "title":"Mixcloud",
+                "description":"<p>Mixcloud describes itself as the YouTube of radio. It is a website to help simplify the sharing and listening to radio programmes, DJ sets, and Podcasts.</p>",
+                "startdate":"2009-09-01 12:00:00",
+                "link":"http://www.mixcloud.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-myspace",
-"title": "MySpace",
-"description": "<p><a href='http://de.wikipedia.org/wiki/Myspace#Entstehung_und_Entwicklung'><img src='img/200px-Myspace_2010_logo.svg.png'/>MySpace</a> wird zur Community mit Schwerpunkt Musik</p>",
-"startdate": "2003-07-01 12:00:00",
-"link":"http://www.myspace.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/socialnetworks.png"
-},
+            {
+                "id":"myspace",
+                "title":"MySpace",
+                "description":"<p><a href='http://de.wikipedia.org/wiki/Myspace#Entstehung_und_Entwicklung'><img src='img/200px-Myspace_2010_logo.svg.png'/>MySpace</a> wird zur Community mit Schwerpunkt Musik</p>",
+                "startdate":"2003-07-01 12:00:00",
+                "link":"http://www.myspace.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/socialnetworks.png"
+            },
 
-{
-"id":"audiohist-echonest",
-"title": "The Echo Nest",
-"description": "<p><img src='img/The_Echo_Nest_Logo.jpg'/>The Echo Nest is a music intelligence platform company that provides music services to developers and media companies. Headquartered in Somerville, MA USA, the Echo Nest was created as a spin-off of research work at the MIT Media Lab that automatically understands the audio and textual content of music and currently powers music data solutions such as recommendation, playlisting, fingerprinting and audio analysis for consumers and developers.</p>",
-"startdate": "2005-06-01 12:00:00",
-"link":"http://de.wikipedia.org/wiki/Myspace#Entstehung_und_Entwicklung",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/audiolibs.png"
-},
+            {
+                "id":"echonest",
+                "title":"The Echo Nest",
+                "description":"<p><img src='img/The_Echo_Nest_Logo.jpg'/>The Echo Nest is a music intelligence platform company that provides music services to developers and media companies. Headquartered in Somerville, MA USA, the Echo Nest was created as a spin-off of research work at the MIT Media Lab that automatically understands the audio and textual content of music and currently powers music data solutions such as recommendation, playlisting, fingerprinting and audio analysis for consumers and developers.</p>",
+                "startdate":"2005-06-01 12:00:00",
+                "link":"http://de.wikipedia.org/wiki/Myspace#Entstehung_und_Entwicklung",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/audiolibs.png"
+            },
 
-{
-"id":"audiohist-playdar",
-"title": "Playdar",
-"description": "<p><img src='img/playdar_logo.gif'/>Playdar - a content resolver for music. Erster Commit auf github.</p>",
-"startdate": "2009-10-01 12:00:00",
-"link":"http://www.playdar.org/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/audiolibs.png"
-},
+            {
+                "id":"playdar",
+                "title":"Playdar",
+                "description":"<p><img src='img/playdar_logo.gif'/>Playdar - a content resolver for music. Erster Commit auf github.</p>",
+                "startdate":"2009-10-01 12:00:00",
+                "link":"http://www.playdar.org/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/audiolibs.png"
+            },
 
-{
-"id":"audiohist-qriocity",
-"title": "Qriocity",
-"description": "<h2>Sony startet Qriocity</h2><p>Qriocity is a trading name for Sony Corporation's streaming music, games, e-books and video on demand services. A video streaming service with the name has been available in the United States since April 2010.</p>",
-"startdate": "2010-06-01 12:00:00",
-"link":"http://www.qriocity.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-},
+            {
+                "id":"qriocity",
+                "title":"Qriocity",
+                "description":"<h2>Sony startet Qriocity</h2><p>Qriocity is a trading name for Sony Corporation's streaming music, games, e-books and video on demand services. A video streaming service with the name has been available in the United States since April 2010.</p>",
+                "startdate":"2010-06-01 12:00:00",
+                "link":"http://www.qriocity.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-{
-"id":"audiohist-mp4",
-"title": "MP4",
-"description": "<p>MP4 ist eine Kurzform für den von der MPEG vorgesehenen Container für MPEG-4-Inhalte und wurde in ISO IEC 14496-12 und -14 (MPEG-4 Teil 12 und 14) standardisiert. Das MP4-Dateiformat basiert auf dem Apple-QuickTime-Dateiformat.</p>",
-"startdate": "2003-01-01 12:00:00",
-"link":"http://en.wikipedia.org/wiki/MPEG-4_Part_14",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/fileformats.png"
-},
+            {
+                "id":"mp4",
+                "title":"MP4",
+                "description":"<p>MP4 ist eine Kurzform für den von der MPEG vorgesehenen Container für MPEG-4-Inhalte und wurde in ISO IEC 14496-12 und -14 (MPEG-4 Teil 12 und 14) standardisiert. Das MP4-Dateiformat basiert auf dem Apple-QuickTime-Dateiformat.</p>",
+                "startdate":"2003-01-01 12:00:00",
+                "link":"http://en.wikipedia.org/wiki/MPEG-4_Part_14",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/fileformats.png"
+            },
 
-{
-"id":"audiohist-music-genome-project",
-"title": "Music Genome Project (Pandora)",
-"description": "<p>Pandora ist ein Internetradio unter der Domain pandora.com und das Ergebnis des Music Genome Projects, welches sich der Musik-Analyse verschrieben hat. Aus lizenzrechtlichen Gründen darf Pandora nur von Bürgern in den USA genutzt werden. Nach Angaben von golem.de wurde im April 2010 die Grenze von 50 Millionen Mitgliedern bei Pandora erreicht. Laut einer US-amerikanischen Studie ist es mit einem Anteil von 28 % bei Internetusern über 12 Jahren das beliebteste Internetradio.</p>",
-"startdate": "2000-01-06 12:00:00",
-"link":"http://www.pandora.com",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/audiolibs.png"
-},
+            {
+                "id":"music-genome-project",
+                "title":"Music Genome Project (Pandora)",
+                "description":"<p>Pandora ist ein Internetradio unter der Domain pandora.com und das Ergebnis des Music Genome Projects, welches sich der Musik-Analyse verschrieben hat. Aus lizenzrechtlichen Gründen darf Pandora nur von Bürgern in den USA genutzt werden. Nach Angaben von golem.de wurde im April 2010 die Grenze von 50 Millionen Mitgliedern bei Pandora erreicht. Laut einer US-amerikanischen Studie ist es mit einem Anteil von 28 % bei Internetusern über 12 Jahren das beliebteste Internetradio.</p>",
+                "startdate":"2000-01-06 12:00:00",
+                "link":"http://www.pandora.com",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/audiolibs.png"
+            },
 
-{
-"id":"audiohist-hypem",
-"title": "The Hype Machine",
-"description": "<p>The Hype Machine is an MP3 blog aggregator created by Anthony Volodkin. It aggregates the most recently posted songs from a selection of music blogs (about 1,500) and lists them on the website's main page.</p>",
-"startdate": "2005-06-01 12:00:00",
-"link":"http://www.hypem.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/blogs.png"
-},
+            {
+                "id":"hypem",
+                "title":"The Hype Machine",
+                "description":"<p>The Hype Machine is an MP3 blog aggregator created by Anthony Volodkin. It aggregates the most recently posted songs from a selection of music blogs (about 1,500) and lists them on the website's main page.</p>",
+                "startdate":"2005-06-01 12:00:00",
+                "link":"http://www.hypem.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/blogs.png"
+            },
 
-{
-"id":"audiohist-songbird",
-"title": "Songbird",
-"description": "<h2>Songbird 0.1 veröffentlicht</h2><p>Songbird (englisch für Singvogel) ist eine erweiterbare, freie Anwendung zur Organisation und Wiedergabe von Medien, die sich auf dem lokalen Rechner oder im Internet befinden. Gleichzeitig ist Songbird eine Plattform für Internetanwendungen, wie Internet-Musikvertreiber oder Netzlabels, indem es eine offene Programmierschnittstelle bereitstellt</p>",
-"startdate": "2006-02-08 12:00:00",
-"link":"http://www.songbirdnest.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/playersoftware.png"
-},
+            {
+                "id":"songbird",
+                "title":"Songbird",
+                "description":"<h2>Songbird 0.1 veröffentlicht</h2><p>Songbird (englisch für Singvogel) ist eine erweiterbare, freie Anwendung zur Organisation und Wiedergabe von Medien, die sich auf dem lokalen Rechner oder im Internet befinden. Gleichzeitig ist Songbird eine Plattform für Internetanwendungen, wie Internet-Musikvertreiber oder Netzlabels, indem es eine offene Programmierschnittstelle bereitstellt</p>",
+                "startdate":"2006-02-08 12:00:00",
+                "link":"http://www.songbirdnest.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/playersoftware.png"
+            },
 
-{
-"id":"audiohist-bandcamp",
-"title": "Bandcamp",
-"description": "<p>Bandcamp changes business model</p>",
-"startdate": "2010-07-20 12:00:00",
-"link":"http://bandcamp.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/shopping.png"
-},
+            {
+                "id":"bandcamp",
+                "title":"Bandcamp",
+                "description":"<p>Bandcamp changes business model</p>",
+                "startdate":"2010-07-20 12:00:00",
+                "link":"http://bandcamp.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/shopping.png"
+            },
 
-{
-"id":"audiohist-emusic",
-"title": "eMusic",
-"description": "<p><a href='http://en.wikipedia.org/wiki/Emusic'>eMusic</a> hatte ursprünglich nur Indie-Labels im Katalog. Über 400.000 Nutzer. Ich war dort Kunde von <a href='http://www.numblog.de/archives/281-eMusic.html'>Oktober 2006</a> bis <a href='http://www.numblog.de/archives/532-eMusic-Abo-gecancelt.html'>Februar 2008</a>.</p>",
-"startdate": "1998-01-01 12:00:00",
-"link":"http://www.emusic.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/shopping.png"
-},
+            {
+                "id":"emusic",
+                "title":"eMusic",
+                "description":"<p><a href='http://en.wikipedia.org/wiki/Emusic'>eMusic</a> hatte ursprünglich nur Indie-Labels im Katalog. Über 400.000 Nutzer. Ich war dort Kunde von <a href='http://www.numblog.de/archives/281-eMusic.html'>Oktober 2006</a> bis <a href='http://www.numblog.de/archives/532-eMusic-Abo-gecancelt.html'>Februar 2008</a>.</p>",
+                "startdate":"1998-01-01 12:00:00",
+                "link":"http://www.emusic.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/shopping.png"
+            },
 
-{
-"id":"audiohist-winamp",
-"title": "Winamp",
-"description": "<p>Winamp ist ein unter Windows verbreiteter Audio- und Medienspieler des Unternehmens AOL.</p>",
-"startdate": "1997-05-01 12:00:00",
-"link":"http://www.winamp.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/playersoftware.png"
-},
+            {
+                "id":"winamp",
+                "title":"Winamp",
+                "description":"<p>Winamp ist ein unter Windows verbreiteter Audio- und Medienspieler des Unternehmens AOL.</p>",
+                "startdate":"1997-05-01 12:00:00",
+                "link":"http://www.winamp.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/playersoftware.png"
+            },
 
-{
-"id":"audiohist-juke",
-"title": "Juke",
-"description": "<p><img src='img/juke-logo.png'/>On-Demand-Streaming-Angebot von der Saturn-Media Holding.</p>",
-"startdate": "2011-09-02 12:00:00",
-"link":"http://www.myjuke.com/",
-"importance":"100",
-"date_display":"month",
-"icon":"../../../icons/cloudstreaming.png"
-}
+            {
+                "id":"juke",
+                "title":"Juke (D)",
+                "description":"<p><img src='img/juke-logo.png'/>On-Demand-Streaming-Angebot von der Saturn-Media Holding.</p>",
+                "startdate":"2011-09-02 12:00:00",
+                "link":"http://www.myjuke.com/",
+                "importance":"100",
+                "date_display":"month",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
 
-],
-"legend": [
-   {"title":"Download-Shops", "icon":"../../../icons/shopping.png"},
-   {"title":"Player-Software", "icon":"../../../icons/playersoftware.png"},
-   {"title":"Musikblogs", "icon":"../../../icons/blogs.png"},
-   {"title":"Software-Bibliotheken", "icon":"../../../icons/audiolibs.png"},
-   {"title":"Dateiformate", "icon":"../../../icons/fileformats.png"},
-   {"title":"Streaming & Cloud", "icon":"../../../icons/cloudstreaming.png"},
-   {"title":"Soziale Netzwerke", "icon":"../../../icons/socialnetworks.png"},
-   {"title":"Hardware", "icon":"../../../icons/playerdevices.png"},
-   {"title":"P2P Filesharing", "icon":"../../../icons/p2p.png"}
-]
-         
-}
+            {
+                "id":"rdio-start-ger",
+                "title":"Rdio (D)",
+                "description":"<p>Rdio startet in Deutschland.</p>",
+                "startdate":"2012-01-12 12:00:00",
+                "link":"http://www.rdio.com/",
+                "importance":"100",
+                "date_display":"day",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
+
+            {
+                "id":"grooveshark-end-ger",
+                "title":"Grooveshark schließt (D)",
+                "description":"<p>Grooveshark stellt seinen Dienst in Deutschland ein und leitet zu Simfy um.</p>",
+                "startdate":"2012-01-18 12:00:00",
+                "link":"http://blog.simfy.de/blog/18-01-2012-grooveshark-geht-simfy-bleibt",
+                "importance":"30",
+                "date_display":"day",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
+
+            {
+                "id":"soundcloud-10-mio",
+                "title":"Soundcloud hat 10 Mio. Mitglieder",
+                "description":"<p>Soundcloud hat jetzt 10 Millionen Mitglieder</p>",
+                "startdate":"2012-01-23 12:00:00",
+                "link":"http://blog.soundcloud.com/2012/01/23/ten-million/",
+                "importance":"10",
+                "date_display":"day",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
+
+            {
+                "id":"spotify-start-ger",
+                "title":"Spotify (D)",
+                "description":"<p>Spotify startet in Deutschland.</p>",
+                "startdate":"2012-03-13 12:00:00",
+                "link":"http://www.spotify.com/de/",
+                "importance":"100",
+                "date_display":"day",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
+
+            {
+                "id":"htc-buys-mog",
+                "title":"HTC kauft MOG (US)",
+                "description":"<p>HTC kauft Streamingdienst MOG</p>",
+                "startdate":"2012-03-22 12:00:00",
+                "link":"http://neumusik.com/2012-03-htc-kauft-streamingdienst-mog/",
+                "importance":"20",
+                "date_display":"day",
+                "icon":"../../../icons/playerdevices.png"
+            },
+
+            {
+                "id":"spotify-play-button",
+                "title":"Spotify Play Button",
+                "description":"<p>Spotify präsentiert den Play Button.</p>",
+                "startdate":"2012-04-11 12:00:00",
+                "link":"https://developer.spotify.com/technologies/spotify-play-button/",
+                "importance":"50",
+                "date_display":"day",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
+
+            {
+                "id":"fmc2012",
+                "title":"#fmc2012",
+                "description":"<iframe src='http://www.futuremusiccamp.com/' width='760' height='250'></iframe>",
+                "startdate":"2012-05-11 09:00:00",
+                "enddate":"2012-05-12 18:00:00",
+                "link":"http://www.futuremusiccamp.com/",
+                "importance":"100",
+                "date_display":"day",
+                "icon":"../../../img/fmc2011.jpg",
+                "modal_type":"full"
+            }
+
+        ],
+        "legend":[
+            {
+                "title":"Download-Shops",
+                "icon":"../../../icons/shopping.png"
+            },
+            {
+                "title":"Player-Software",
+                "icon":"../../../icons/playersoftware.png"
+            },
+            {
+                "title":"Musikblogs",
+                "icon":"../../../icons/blogs.png"
+            },
+            {
+                "title":"Software-Bibliotheken",
+                "icon":"../../../icons/audiolibs.png"
+            },
+            {
+                "title":"Dateiformate",
+                "icon":"../../../icons/fileformats.png"
+            },
+            {
+                "title":"Streaming & Cloud",
+                "icon":"../../../icons/cloudstreaming.png"
+            },
+            {
+                "title":"Soziale Netzwerke",
+                "icon":"../../../icons/socialnetworks.png"
+            },
+            {
+                "title":"Hardware",
+                "icon":"../../../icons/playerdevices.png"
+            },
+            {
+                "title":"P2P Filesharing",
+                "icon":"../../../icons/p2p.png"
+            }
+        ]
+
+    }
 ]
